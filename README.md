@@ -1,34 +1,83 @@
-# Engineering Friction 69.3 — The Third Clock Model
+# Engineering Friction
 
-Monte Carlo stress model measuring yield pressure on the US Treasury market through eight independent channels. Companion code for [Engineering Friction 69.3: The Third Clock](https://ehadnameh.substack.com).
+Monte Carlo stress model measuring yield pressure on the US Treasury market through eight independent channels. Companion code for the [Engineering Friction](https://ehadnameh.substack.com) series on Substack.
 
-## What the model does
+## The series
 
-The model runs 10,000 simulations asking one question: **how much yield pressure do eight structural channels produce on the US Treasury market, and does that pressure exceed the system's tolerance threshold?**
+Engineering Friction is a seven-piece analytical series on the structural mechanics of the Iran-US-Israel war, how it gets paid for, and what survives the payment.
 
-Each iteration samples every parameter from a triangular distribution (minimum, mode, maximum). The channels share a common demand elasticity drawn once per iteration. The model tracks channel coupling — one channel's output feeds another's input probability.
+| # | Title | What it does |
+|---|-------|-------------|
+| 69.1 | **The Engineered Friction** | Documents twenty-something structural outcomes the war produces simultaneously. Nine problems solved at once, three channels of institutional capture, carrying capacity destroyed across the Middle East to build the Hard State. Establishes the thesis: the war is not a policy failure, it is an architecture. |
+| 69.2 | **The Trigger Point** | Traces the war-finance coupling from Laurion silver mines to the Federal Reserve. Identifies three clocks running against the war coalition: Clock 1 (Chinese material science solving silver dependency), Clock 2 (Treasury market confidence eroding), Clock 3 (household withdrawal from the grid). |
+| 69.3 | **The Board Holds** | Runs the war-suppressed Monte Carlo model. Eight channels, ten thousand iterations, five-year horizon. Result: 63.4 basis points of combined pressure against 396 basis points of headroom. 0% threshold crossing. The board holds. Then documents what the headroom hides: the debt curve, velocity decline, fiscal dominance trajectory, demand elasticity cliffs, and de-dollarization rebuild. Also covers the US mineral pivot (Orinoco, DRC, Argentina), Israel's territorial logic, Iran's rehabilitation play, and the institutional harvest running under wartime cover. |
+| 69.4 | **The Third Clock** | Runs the coupled model with post-2010 demand elasticity, channel interactions, and adjusted headroom. Result: 516 basis points against 168 adjusted headroom. 92.6% threshold crossing. Then pivots: if Clock 3 (household withdrawal) produces only 11% of the pressure, what does it do that the other clocks cannot? Introduces Garrett's thermodynamic double-bind, the second energy pathway (hydrological cycle), and a 1,400-year-old operational specification for the exit. Includes a full technical addendum walking through every channel, parameter, and chart. |
+| 69.5 | **The Three Jerusalems** | Forthcoming. The eschatological architecture driving all three actors. |
+| 69.6 | **The Fourth Direction** | Forthcoming. |
+| A | **Addendum A** | Forthcoming. Full parameter tables and model audit. |
 
-**Key outputs (median across 10,000 runs):**
+All published at [ehadnameh.substack.com](https://ehadnameh.substack.com). Free. Always free.
 
-- Combined yield pressure: **516 basis points**
-- Adjusted headroom: **168 basis points** (396 raw, minus 213 from debt self-feeding, minus 12 from energy masking)
-- Headroom consumed: **302%**
-- Threshold crossing probability: **92.6%**
+## Two scenarios, one model
+
+The model runs two configurations on the same eight channels:
+
+| | War-suppressed (69.3) | Coupled (69.4) |
+|---|---|---|
+| Channel coupling | Off | On (one channel's output feeds another's probability) |
+| Demand elasticity | Pre-2010 regime | Post-2010 regime (Somogyi, Wallen, Xu 2025) |
+| Headroom | 396 bps raw | 168 bps adjusted (debt self-feeding consumes 213, energy masking 12) |
+| Combined pressure | 63.4 bps median | 516 bps median |
+| Threshold crossing | 0.0% | 92.6% |
+| Interpretation | The war buys 5-8 years of headroom | The pressure surfaces when suppressive effects fade |
+
+The war-suppressed model shows what the system looks like while the war is doing what it was designed to do. The coupled model shows what accumulates underneath.
 
 ## The eight channels
 
-| # | Channel | Median bps | Mechanism |
-|---|---------|-----------|-----------|
-| 1 | De-dollarization | 271 | Five sub-channels: oil settlement shift, FX reserve diversification, BRICS bilateral trade, accelerated Treasury dumping, consumer boycotts |
-| 2 | Domestic institutional | 155 | Cliff behavior in US pension funds, insurance, money markets ($8.7T in Treasuries). Conditional on confidence shock — standalone 65%, rises to 93% under stress |
-| 3 | Household withdrawal | 58 | Sovereign selling and balance-of-payments pressure from seven geographies as families exit the formal economy |
-| 4 | Regional capital flight | 25 | Gulf private wealth ($1.5-3.5T) fleeing to London, Istanbul, Delhi, Singapore. Net 57% leaves dollar system |
-| 5 | Silver scissors | 11 + 1.16x | Cost inflation, credibility multiplier on de-dollarization, disruption tail risk |
-| 6 | Energy feedback | 9 net + 12 masking | Two-phase: dollar strengthens short-run, deficit widens long-run. Masking erodes headroom during false calm |
-| 7 | Israel pipeline | 1.5 | Tech workforce emigration (8,300 since Oct 2023), replacement costs, program delays |
-| 8 | Fiscal dominance | 19 (when active) | Regime switch (Leeper 1991): rate hikes become self-defeating when interest-to-revenue ratio crosses threshold. Activates in 63% of runs |
+| # | Channel | Module | War-suppressed (bps) | Coupled (bps) | Mechanism |
+|---|---------|--------|---------------------|---------------|-----------|
+| 1 | De-dollarization | `dedollarization.py` | 23.5 | 271 | Oil settlement shift, FX reserve diversification, BRICS bilateral trade, accelerated Treasury dumping, consumer boycotts |
+| 2 | Domestic institutional | `domestic_institutional.py` | 10.2 | 155 | Cliff behavior in US pension funds, insurance, money markets ($8.7T). Standalone probability 65%, under stress 93% |
+| 3 | Household withdrawal | `withdrawal.py` | 8.1 | 58 | Sovereign selling and balance-of-payments pressure from seven geographies as families exit the formal economy |
+| 4 | Regional capital flight | `capital_flight.py` | 6.3 | 25 | Gulf private wealth ($1.5-3.5T) fleeing to London, Istanbul, Delhi, Singapore. Net 57% leaves dollar system |
+| 5 | Silver scissors | `clock1.py` | 3.8 | 11 + 1.16x multiplier | Cost inflation on $250B silver-sensitive spending, credibility multiplier on de-dollarization, disruption tail risk |
+| 6 | Energy feedback | `energy_feedback.py` | 5.1 | 9 net + 12 masking | Two-phase: dollar strengthens short-run (masking), deficit widens long-run |
+| 7 | Israel pipeline | `israel_pipeline.py` | 1.5 | 1.5 | Tech workforce emigration (8,300 since Oct 2023), replacement costs, program delays |
+| 8 | Fiscal dominance | `fiscal_dominance.py` | inactive | 19 (when active) | Regime switch (Leeper 1991): rate hikes become self-defeating. Activates in 63% of coupled runs |
 
 Policy response (rate cuts, bilateral deals, fiscal adjustment) absorbs ~50 bps but gets neutralized when fiscal dominance activates.
+
+## Charts
+
+### 69.3 charts (war-suppressed model + structural analysis)
+
+| Chart | File | What it shows |
+|-------|------|--------------|
+| Board Holds scatter | `chart_693a_board_holds_scatter.png` | 10,000 iterations, all blue (below threshold). 0% crossing. The visual proof the board holds. |
+| Mineral pivot | `chart_693c_mineral_pivot.png` | US strategic mineral positioning: Orinoco gold (7,000t est.), DRC cobalt (70% of global), Argentine lithium, Orinoco rare earths and coltan. All signed at wartime speed. |
+| Headroom distribution | `chart1_headroom_distribution.png` | Raw headroom (396 bps) vs adjusted (168 bps). Shows the system narrowing its own survival window through debt self-feeding before any external pressure arrives. |
+| Fiscal dominance trajectory | `chart_693b_fiscal_dominance_trajectory.png` | Interest-to-revenue ratio climbing from 19% toward the 33% threshold. Central estimate crosses year 6-7. High estimate crosses year 3-4. |
+| Phase 1 vs Phase 2 | `chart4_phase1_vs_phase2.png` | Paired bars showing how the war's short-term signals (small Phase 1) mask long-term structural damage (large Phase 2). Bridges to 69.4. |
+| Convergent destruction | `chart_693d_convergent_destruction.png` | Three actors (US, Israel, Iran) with divergent goals converging on one war. Shared outcomes below: corridors destroyed, architecture hardened, exits close. |
+
+### 69.4 charts (coupled model, in addendum)
+
+| Chart | File | What it shows |
+|-------|------|--------------|
+| Headroom distribution | `chart1_headroom_distribution.png` | Same chart, provides context for adjusted headroom calculation in the addendum. |
+| Pressure vs headroom scatter | `chart2_pressure_vs_headroom.png` | 10,000 iterations: 92.6% red (above threshold). The payoff chart. Median at (168, 516). |
+| Component breakdown | `chart3_component_breakdown.png` | All 8 channels as horizontal bars at coupled values. De-dollarization (271) and institutional (155) dominate. Policy response goes negative (-50). |
+| Phase 1 vs Phase 2 | `chart4_phase1_vs_phase2.png` | Same chart, sits alongside full channel analysis in the addendum. |
+| Sensitivity tornado | `chart5_sensitivity_tornado.png` | P10-to-P90 uncertainty range per channel. De-dollarization has the widest bar. Shows where the model is most and least certain. |
+| Coupling cascade | `chart6_coupling_cascade.png` | Directed flow diagram showing how channels trigger each other. De-dollarization and withdrawal feed combined pressure, which triggers institutional shock, which activates fiscal dominance. |
+
+### Model development (wiki only)
+
+| Chart | File | What it shows |
+|-------|------|--------------|
+| v1 vs v2 | `chart4_v1_vs_v2.png` | Original point estimate vs war-suppressed Monte Carlo. |
+| v1 vs v3 | `chart4_v1_vs_v3.png` | Original point estimate vs coupled Monte Carlo. Shows how headroom, pressure, and consumption changed between model versions. |
 
 ## Repository structure
 
@@ -48,14 +97,18 @@ model/
   overlap.py             # Cross-channel overlap corrections
   threshold.py           # Headroom derivation and threshold calibration
   ycc_loop.py            # Yield curve control scenario (optional)
-  charts.py              # Chart generation (charts 1-4)
+  charts.py              # Chart generation (charts 1-6)
 charts/
-  chart1_headroom_distribution.png   # Raw vs adjusted headroom
-  chart2_pressure_vs_headroom.png    # Scatter: every iteration
-  chart3_component_breakdown.png     # Channel contribution bars
-  chart4_phase1_vs_phase2.png        # Short-run vs long-run per channel
-  chart5_sensitivity_tornado.png     # P10-P90 uncertainty range per channel
-  chart6_coupling_cascade.png        # Directed diagram: channel triggering chain
+  chart1_headroom_distribution.png
+  chart2_pressure_vs_headroom.png
+  chart3_component_breakdown.png
+  chart4_phase1_vs_phase2.png
+  chart5_sensitivity_tornado.png
+  chart6_coupling_cascade.png
+  chart_693a_board_holds_scatter.png
+  chart_693b_fiscal_dominance_trajectory.png
+  chart_693c_mineral_pivot.png
+  chart_693d_convergent_destruction.png
 ```
 
 ## How to run
@@ -64,22 +117,10 @@ Requires Python 3.9+ with `numpy`, `matplotlib`, and `scipy`.
 
 ```bash
 pip install numpy matplotlib scipy
-```
-
-Run the full simulation:
-
-```bash
 cd model
 python monte_carlo.py
-```
-
-Generate charts 1-4:
-
-```bash
 python charts.py
 ```
-
-Charts 5-6 are generated by a separate script (included in the essay build pipeline, not in this repo, but the data comes from `monte_carlo.py`).
 
 Each module runs standalone. Import any channel module and call its function with a seeded `numpy.random.Generator` to get that channel's output in isolation.
 
@@ -95,6 +136,8 @@ Every parameter is drawn from a named source. Key references:
 - **UK gilt crisis**: Bank of England, September 2022. LDI-driven forced selling, 100+ bps in 4 days.
 - **Debt structure**: TreasuryDirect maturity buckets. 33% rolls within one year, 37% within five years.
 - **Fiscal dominance theory**: Leeper, E., "Equilibria under 'active' and 'passive' monetary and fiscal policies," Journal of Monetary Economics, 27(1), 129-147, 1991.
+- **Garrett's constant**: Garrett, T. J., "No way out? The double-bind in seeking global prosperity alongside mitigated climate change," Earth Syst. Dynam., 3, 1-17, 2012. Lambda = 9.7 +/- 0.3 mW per 1990 USD.
+- **Cox critique**: Cox et al., "Emergent constraint on equilibrium climate sensitivity from global temperature variability," Nature, 553, 319-322, 2018.
 - **Pakistan labour force**: Pakistan Bureau of Statistics, Labour Force Survey 2023-24. ~70% informal.
 - **Israel tech emigration**: Israeli Central Bureau of Statistics via Calcalist. 8,300 workers since October 2023.
 
@@ -103,18 +146,6 @@ Parameters marked ASSUMPTION in `config.py` are explicitly labeled. Change any a
 ## Limitations
 
 This is a structural stress test, not a forecast. It identifies which levers produce how much pressure, at what cost, in which geographies. It does not predict timing. The model will be wrong in ways not yet identified. The difference between a model that earns trust and one that claims truth is whether the author names the assumptions before the reader has to.
-
-## Series
-
-Engineering Friction is a six-piece analytical series on the structural mechanics of the Iran-US-Israel war.
-
-- 69.1: The Engineered Friction
-- 69.2: The Trigger Point
-- **69.3: The Third Clock** (this model)
-- 69.4: The Three Jerusalems
-- 69.5-69.6: forthcoming
-
-All published at [ehadnameh.substack.com](https://ehadnameh.substack.com). Free. Always free.
 
 ## Tools
 
